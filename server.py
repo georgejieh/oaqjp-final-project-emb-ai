@@ -1,6 +1,10 @@
+"""
+Flask server for emotion detection application.
+"""
+
+import json
 from flask import Flask, request, render_template
 from EmotionDetection import emotion_detector
-import json
 
 app = Flask(__name__)
 
@@ -16,6 +20,9 @@ def emotion_detector_endpoint():
     """
     Endpoint for emotion detection. Processes a GET request with a statement
     and returns the formatted response. Handles blank or invalid input gracefully.
+
+    Returns:
+        str: Formatted response or error message.
     """
     # Get the input text from the query parameters
     statement = request.args.get('textToAnalyze', '').strip()
