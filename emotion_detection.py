@@ -3,13 +3,13 @@ import json
 
 def emotion_detector(text_to_analyze):
     """
-    Detects emotions in the provided text and returns the scores and dominant emotion.
+    Detects emotions in the provided text and returns a pretty-printed JSON string with the scores and dominant emotion.
     
     Parameters:
         text_to_analyze (str): The text that needs to be analyzed for emotions.
     
     Returns:
-        dict: A dictionary with the scores of emotions and the dominant emotion.
+        str: A pretty-printed JSON string with the scores of emotions and the dominant emotion.
     """
     # API endpoint and headers
     url = "https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict"
@@ -50,13 +50,14 @@ def emotion_detector(text_to_analyze):
                 "dominant_emotion": dominant_emotion
             }
             
-            # Print the result in Pretty-Print
-            print(json.dumps(result, indent=4))
-            
-            return result
+            # Return the pretty-printed JSON string
+            return json.dumps(result, indent=4)
         else:
             # Handle unsuccessful responses
             raise Exception(f"API call failed with status code {response.status_code}: {response.text}")
     except Exception as e:
         # Handle exceptions (e.g., network issues or API errors)
-        return {"error": str(e)}
+        return json.dumps({"error": str(e)}, indent=4)
+
+# Example usage
+# print(emotion_detector("I am so happy I am doing this."))
