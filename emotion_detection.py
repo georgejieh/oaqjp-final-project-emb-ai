@@ -50,6 +50,9 @@ def emotion_detector(text_to_analyze):
                 "dominant_emotion": dominant_emotion
             }
             
+            # Print the result in Pretty-Print
+            print(json.dumps(result, indent=4))
+            
             return result
         else:
             # Handle unsuccessful responses
@@ -57,7 +60,3 @@ def emotion_detector(text_to_analyze):
     except Exception as e:
         # Handle exceptions (e.g., network issues or API errors)
         return {"error": str(e)}
-
-# Example usage
-result = emotion_detector("I love this new technology.")
-print(result)
